@@ -47,7 +47,7 @@ while True:
             target_price = get_target_price("KRW-ETH", 0.2)
             current_price = get_current_price("KRW-ETH")
             if target_price < current_price:
-                krw = get_balance("KRW")/3 
+                krw = get_balance("KRW") 
                 if upbit.get_balance("KRW-ETH")>0 : 
                     if krw > 5000:
                         upbit.buy_market_order("KRW-ETH", krw*0.9995)
