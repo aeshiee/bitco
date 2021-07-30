@@ -40,22 +40,16 @@ print("autotrade start")
 while True:
     try:
         now = datetime.datetime.now()
-        start_time = get_start_time("KRW-ETH")
+        start_time = get_start_time("KRW-BTC")
         end_time = start_time + datetime.timedelta(days=1)
 
-        if start_time < now < end_time - datetime.timedelta(seconds=10):
-            target_price = get_target_price("KRW-ETH", 0.2)
-            current_price = get_current_price("KRW-ETH")
-            if target_price < current_price:
-                krw = get_balance("KRW") 
-                if upbit.get_balance("KRW-ETH")>0 : 
-                    if krw > 5000:
-                        upbit.buy_market_order("KRW-ETH", krw*0.9995)
-        else:
-            btc = get_balance("ETH")
+        if start_time < now < end_time - datetime.timedelta(seconds=10):  
+            btc = get_balance("BTC") 
+            balance_value = ( pyupbit.get_current_price("KRW-BTC") - upbit.get_avg_buy_price("KRW-BTC")  ) / upbit.get_avg_buy_price("KRW-BTC") * 100
+  
             if btc > 0.00008:
-                if upbit.get_avg_buy_price("KRW-ETH") > pyupbit.get_current_price("KRW-ETH"):
-                    upbit.sell_market_order("KRW-ETH", btc*0.9995)
+                if balance_value > 2 :
+                    upbit.sell_market_order("KRW-BTC", btc*0.9995) 
         time.sleep(1)
     except Exception as e:
         print(e)
