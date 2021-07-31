@@ -42,10 +42,10 @@ while True:
         now = datetime.datetime.now()
         start_time = get_start_time("KRW-ETH")
         end_time = start_time + datetime.timedelta(days=1)
-        balance_value = ( pyupbit.get_current_price("KRW-ETH") - upbit.get_avg_buy_price("KRW-ETH")  ) / upbit.get_avg_buy_price("KRW-ETH") * 100   
+         
 
         if start_time < now < end_time - datetime.timedelta(seconds=10):  
-            target_price = get_target_price("KRW-THE", 0.2)
+            target_price = get_target_price("KRW-ETH", 0.2)
             current_price = get_current_price("KRW-ETH")
             if target_price < current_price :
                 krw = get_balance("KRW")/2
@@ -54,9 +54,10 @@ while True:
 
         else :
             eth =   get_balance("ETH")
-            if eth > 0.00008:
-                if balance_value > 2 :
-                    upbit.sell_market_order("KRW-ETH", eth*0.9995) 
+            balance_value = ( pyupbit.get_current_price("KRW-ETH") - upbit.get_avg_buy_price("KRW-ETH")  ) / upbit.get_avg_buy_price("KRW-ETH") * 100   
+        
+            if balance_value > 2 :
+                upbit.sell_market_order("KRW-ETH", eth*0.9995) 
         time.sleep(1)
     except Exception as e:
         print(e)
