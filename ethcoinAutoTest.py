@@ -47,10 +47,10 @@ while True:
         if start_time < now < end_time - datetime.timedelta(seconds=10):  
             target_price = get_target_price("KRW-ETH", 0.2)
             current_price = get_current_price("KRW-ETH")
-            if target_price < current_price :
-                if  upbit.get_avg_buy_price("KRW-BTC")< 5000 : 
-                    krw = get_balance("KRW")
-                    if  upbit.get_avg_buy_price("KRW-ETH") < 5000 : 
+            if target_price < current_price : 
+                if  upbit.get_avg_buy_price("KRW-BTC")> 0 : 
+                    krw = get_balance("KRW") 
+                    if  upbit.get_avg_buy_price("KRW-ETH") <1 : 
                         upbit.buy_market_order("KRW-ETH",krw*0.9995) 
 
             if upbit.get_avg_buy_price("KRW-ETH")  > 0 :  
