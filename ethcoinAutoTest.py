@@ -55,7 +55,7 @@ while True:
 
             if upbit.get_avg_buy_price("KRW-ETH")  > 0 :  
                 balance_sell_value =  ( pyupbit.get_current_price("KRW-ETH") - upbit.get_avg_buy_price("KRW-ETH")  ) / upbit.get_avg_buy_price("KRW-ETH") * 100  
-                if balance_sell_value > 1.5 : 
+                if balance_sell_value > 1.4 : 
                     upbit.sell_market_order("KRW-ETH", get_balance("ETH")*0.9995 )
                 
  
