@@ -42,20 +42,12 @@ while True:
         now = datetime.datetime.now()
         start_time = get_start_time("KRW-BTC")
         end_time = start_time + datetime.timedelta(days=1)
-         
-
-        if start_time < now < end_time - datetime.timedelta(seconds=10):  
-            target_price = get_target_price("KRW-BTC", 0.2)
-            current_price = get_current_price("KRW-BTC")
-            if target_price < current_price :
-                krw = get_balance("KRW")/2
-                if pyupbit.get_current_price("KRW-BTC") < 5000 : 
-                    upbit.buy_market_order("KRW-BTC",krw*0.9995) 
-
-            if upbit.get_avg_buy_price("KRW-BTC")  > 0 :  
-                balance_sell_value =  ( pyupbit.get_current_price("KRW-BTC") - upbit.get_avg_buy_price("KRW-BTC")  ) / upbit.get_avg_buy_price("KRW-BTC") * 100  
-                if balance_sell_value > 1.5 : 
-                    upbit.sell_market_order("KRW-BTC", get_balance("BTC")*0.9995 )
+          
+        if upbit.get_avg_buy_price("KRW-BTC")  > 0 :   
+            balance_sell_value =  ( pyupbit.get_current_price("KRW-BTC") - upbit.get_avg_buy_price("KRW-BTC")  ) / upbit.get_avg_buy_price("KRW-BTC") * 100  
+            print(balance_sell_value)
+            if balance_sell_value > 0.6 :  
+                upbit.sell_market_order("KRW-BTC", get_balance("BTC")*0.9995 )
                 
  
         time.sleep(1)
